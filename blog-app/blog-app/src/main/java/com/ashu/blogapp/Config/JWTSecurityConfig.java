@@ -58,10 +58,10 @@ public class JWTSecurityConfig {
     }
 
 
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder);
-
-    }
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+//        auth.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder);
+//
+//    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
