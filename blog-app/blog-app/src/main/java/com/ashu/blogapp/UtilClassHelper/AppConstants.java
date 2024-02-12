@@ -1,4 +1,4 @@
-package com.ashu.blogapp.Config;
+package com.ashu.blogapp.UtilClassHelper;
 
 import javax.swing.plaf.PanelUI;
 

@@ -1,17 +1,12 @@
 package com.ashu.blogapp.Controllers;
 
-import com.ashu.blogapp.Config.AppConstants;
-import com.ashu.blogapp.Entity.Post;
+import com.ashu.blogapp.UtilClassHelper.AppConstants;
 import com.ashu.blogapp.Payloads.APIResponse;
-import com.ashu.blogapp.Payloads.CategoryDto;
 import com.ashu.blogapp.Payloads.PostDto;
 import com.ashu.blogapp.Payloads.PostResponse;
 import com.ashu.blogapp.Services.FileService;
 import com.ashu.blogapp.Services.PostService;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.el.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

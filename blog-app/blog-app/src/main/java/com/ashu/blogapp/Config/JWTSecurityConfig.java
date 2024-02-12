@@ -58,15 +58,14 @@ public class JWTSecurityConfig {
     }
 
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
-        return builder.getAuthenticationManager();
-    }
-
-
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder);
 
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
+        return builder.getAuthenticationManager();
     }
 
 
