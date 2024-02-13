@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     }
 
     // Handling exception while validating User
-    // "MethodArgumentNotValidException" is exception that was occuring so using it for handling exception
+    // "MethodArgumentNotValidException" is exception that was occurring so using it for handling exception
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleMethodArgsNotValidException(MethodArgumentNotValidException ex){
 
@@ -41,6 +41,16 @@ public class GlobalExceptionHandler {
 
 
         return new ResponseEntity<Map<String, String>>(response, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(ApiLoginException.class)
+    public ResponseEntity<APIResponse> handleApiLoginException(ApiLoginException ex){
+        String message = ex.getMessage();
+
+        APIResponse apiResponse = new APIResponse(message, true);
+
+        return new ResponseEntity<APIResponse>(apiResponse, HttpStatus.BAD_REQUEST);
     }
 
 

@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +37,10 @@ public class UserController {
         return ResponseEntity.ok(updatedUserDto1);
     }
 
+    // this can be only done by only "ADMIN"
     //DELETE - delete User
+    @PreAuthorize("hasRole('ADMIN')")       // THIS API IS ONLY AVAILABLE TO ADMIN
+
     @DeleteMapping("/{userId}")
 
     //We could also use "public void" if we don't want to return anything from the method, but we are returning here something, so we used "public ResponseEntity nd using APIResponse class we created for various Responses we get"

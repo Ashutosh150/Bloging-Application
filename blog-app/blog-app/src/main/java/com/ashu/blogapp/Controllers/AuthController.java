@@ -1,5 +1,6 @@
 package com.ashu.blogapp.Controllers;
 
+import com.ashu.blogapp.Exceptions.ApiLoginException;
 import com.ashu.blogapp.Payloads.JWTAuthRequest;
 import com.ashu.blogapp.Payloads.JWTAuthResponse;
 import com.ashu.blogapp.Security.JWTTokenHelper;
@@ -60,15 +61,19 @@ public class AuthController {
             authenticationManager.authenticate(authentication);
 
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException(" Invalid Username or Password  !!");
+//            throw new BadCredentialsException(" Invalid Username or Password  !!");
+            throw new ApiLoginException("Invalid Username or Password  !!");
+
         }
 
     }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public String exceptionHandler() {
-        return "Credentials Invalid !!";
-    }
+//     We are creating custom exception(ApiLoginException) for this stage
+
+//    @ExceptionHandler(BadCredentialsException.class)
+//    public String exceptionHandler() {
+//        return "Credentials Invalid !!";
+//    }
 
 
 
