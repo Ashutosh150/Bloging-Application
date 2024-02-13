@@ -1,10 +1,14 @@
 package com.ashu.blogapp.Payloads;
 
+import com.ashu.blogapp.Entity.Roles;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 //@Getter
@@ -31,6 +35,8 @@ public class UserDto {
 
     @NotEmpty
     private String about;
+
+    private Set<RolesDto> roles = new HashSet<>();
 
 
 }

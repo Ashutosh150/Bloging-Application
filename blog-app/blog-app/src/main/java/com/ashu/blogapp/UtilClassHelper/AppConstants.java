@@ -1,5 +1,7 @@
 package com.ashu.blogapp.UtilClassHelper;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+
 import javax.swing.plaf.PanelUI;
 
 public class AppConstants {
@@ -11,6 +13,9 @@ public class AppConstants {
     public static final String SORT_BY = "postId";
 
     public static final String SORT_DIRECTION = "ASC";
+
+    public static final Integer NORMAL_USER = 502;
+    public static final Integer ADMIN_USER = 501;
 
 
 }

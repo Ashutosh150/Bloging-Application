@@ -1,15 +1,20 @@
 package com.ashu.blogapp.Services.Impl;
 
+import com.ashu.blogapp.Entity.Roles;
 import com.ashu.blogapp.Entity.User;
 import com.ashu.blogapp.Exceptions.ResourceNotFoundException;
 import com.ashu.blogapp.Payloads.UserDto;
+import com.ashu.blogapp.Repository.RolesRepo;
 import com.ashu.blogapp.Repository.UserRepo;
 import com.ashu.blogapp.Services.UserService;
+import com.ashu.blogapp.UtilClassHelper.AppConstants;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,6 +55,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ModelMapper modelMapper;
 
+
+
+
     public User dtoTOuser(UserDto userDto){
         User user = this.modelMapper.map(userDto, User.class);
         return user;
@@ -60,7 +68,6 @@ public class UserServiceImpl implements UserService {
 
         return userDto;
     }
-
 
 
 
@@ -119,7 +126,32 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    //  for registering users along with specific role nd encrypted password
+    // controller for this method will be in "authcontroller"
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RolesRepo rolesRepo;
+
+
+    @Override
+    public UserDto registerNewUser(UserDto userDto) {
+
+        User user = this.modelMapper.map(userDto, User.class);
+
+        // 1. need to be carefull for passwords as they would get encypt as set into DB
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+
+        // 2. need to be carefull for Setting roles
+        Roles role = this.rolesRepo.findById(AppConstants.NORMAL_USER).get();
+        user.getRoles().add(role);
+
+
+        User newUser = this.userRepo.save(user);
+
+        return this.modelMapper.map(newUser, UserDto.class);
+    }
 
 
 }

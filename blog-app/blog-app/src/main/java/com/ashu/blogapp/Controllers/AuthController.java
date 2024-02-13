@@ -3,7 +3,9 @@ package com.ashu.blogapp.Controllers;
 import com.ashu.blogapp.Exceptions.ApiLoginException;
 import com.ashu.blogapp.Payloads.JWTAuthRequest;
 import com.ashu.blogapp.Payloads.JWTAuthResponse;
+import com.ashu.blogapp.Payloads.UserDto;
 import com.ashu.blogapp.Security.JWTTokenHelper;
+import com.ashu.blogapp.Services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +77,19 @@ public class AuthController {
 //        return "Credentials Invalid !!";
 //    }
 
+
+
+    //  for registering users along with specific role nd encrypted password
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> registeringNewUser(@RequestBody UserDto userDto){
+
+        UserDto registerNewUser = this.userService.registerNewUser(userDto);
+
+        return new ResponseEntity<UserDto>(registerNewUser, HttpStatus.CREATED);
+    }
 
 
 

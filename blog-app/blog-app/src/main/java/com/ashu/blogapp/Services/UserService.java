@@ -21,4 +21,8 @@ public interface UserService {
 
     void deleteUser(Integer userId);
 
+
+    //  for registering users along with specific role nd encrypted password
+    UserDto registerNewUser(UserDto userDto);
+
 }

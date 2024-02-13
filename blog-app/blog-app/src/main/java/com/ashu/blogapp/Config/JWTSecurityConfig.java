@@ -52,10 +52,10 @@ public class JWTSecurityConfig {
         http.
                 csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/auth/login")
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/auth/**")
 //                        .hasRole()
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET).permitAll()    // any GET is accessible by any 1(Normal/admin)
+                        .requestMatchers(HttpMethod.GET).permitAll()// any GET is accessible by any 1(Normal/admin)
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
