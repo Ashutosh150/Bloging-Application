@@ -21,6 +21,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @Configuration
@@ -29,6 +30,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 // this is for role based access
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 
+//@EnableWebMvc
 public class JWTSecurityConfig {
 
     @Autowired
@@ -52,10 +54,14 @@ public class JWTSecurityConfig {
         http.
                 csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/auth/**")
-//                        .hasRole()
-                        .permitAll()
+                .authorizeHttpRequests(
+                        authorize -> authorize.requestMatchers("/api/auth/**"
+//                                        , "/swagger-ui/**", "/v3/api-docs/**"
+                                ).permitAll()
+
+
                         .requestMatchers(HttpMethod.GET).permitAll()// any GET is accessible by any 1(Normal/admin)
+
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -72,6 +78,7 @@ public class JWTSecurityConfig {
 //        auth.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder);
 //
 //    }
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
